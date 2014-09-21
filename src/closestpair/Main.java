@@ -6,12 +6,10 @@ import java.util.Scanner;
 
 public class Main {
 	
-	static int number_of_lines = 0;
+	static int number_of_lines;
 	static DataPoint[] dp_array;
 	
 	public static void main(String[] Args) throws Exception{
-		getNOL(Args[0]);
-		dp_array = new DataPoint[number_of_lines];
 		readFile(Args[0]);
 		for(int i = 0; i < dp_array.length; i++){
 			String s = DataPoint.toString(dp_array[i]);
@@ -19,24 +17,13 @@ public class Main {
 		}
 	}
 	
-	public static void getNOL(String s) throws Exception{
-		try{
-			Scanner newFile = new Scanner(new File(s));
-			while(newFile.hasNextLine()){
-				++number_of_lines;
-				newFile.nextLine();
-			}
-				newFile.close();
-		}
-			catch(FileNotFoundException exception){
-				System.out.println("Missing File");
-			}
-	}
-	
 	public static void readFile(String s){
 		int i = 0;
 		try{
 			Scanner newFile = new Scanner(new File(s));
+			number_of_lines = newFile.nextInt();
+			dp_array = new DataPoint[number_of_lines];
+			newFile.nextLine();
 			while(newFile.hasNextLine()){
 				double x = newFile.nextDouble();
 				double y = newFile.nextDouble();
