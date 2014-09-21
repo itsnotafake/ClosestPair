@@ -1,0 +1,47 @@
+Radix Sort (Negatives and Floats make me want to kill myself):
+1: Divide our DataPoint array into 2 new arrays - one with negative x coordinates and one with positive x coordinates.
+
+Starting with positive x coordinates:
+	1: find the longest number (yes, because of decimals we want the longest number not highest in value to determine our index) and use this as the index
+		(index meaning how many buckets we will make). For example, if 100 is longest then the index is 3. If 3.000000001 is longest, the index is 10. 
+	2: Find the longest decimal and add this many zeroes to all numbers. This has to be done so that values can be bucketed correctly. If we only had ints 
+		to worry about checking the hundredth value, for example, is easy. 2 does not have a hundredth value and so you would normally think it would be 
+		difficult to place in a bucket when doing hundred values. However, since we turn 2 into a string, then a char array, we can just put 2 into the '0'
+		bucket if index > char[].length. Normally this wouldn't work with floats, but adding 0's so that all floats have the same decimal length fixes the 
+		problem.
+	3: now for the amount of times we have index (so we do 5 times if index=5), we noted the sizes of each bucket (0-9). Example, first iteration on list
+		{90, 56, 2, 43, 70, 1} returns an array 
+		 
+		0{2},
+		1{1},
+		2{1},
+		3{1},
+		4{0},
+		5{0},
+		6{1},
+		7{0},
+		8{0},
+		9{0}
+		
+	4: Create 10 different arrays/buckets of the sizes indicated, then go through original array and place values into the arrays they belong. For example,
+		based on the data set above, there will be a 0-array of size 2, and 90 and 70 will go in it. Merge the arrays so that you get
+		{90, 70, 1, 2, 43, 56}
+	5: Since we are looping over the index value (in this case 2), this will next be done for the 'tenth' value position. So, we will get:
+		0{2},
+		1{0},
+		2{0},
+		3{0},
+		4{1},
+		5{1},
+		6{0},
+		7{1},
+		8{0},
+		9{1}
+		{1, 2, 43, 56, 70, 90}
+		
+Negative Coordinate set:
+	1: Go through list and take off negative sign
+	2: Do the same things as before, from largerst to smallest
+	3: Go through list and add negative sign
+	
+2: Put the two lists together.

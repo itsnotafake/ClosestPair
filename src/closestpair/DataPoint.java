@@ -27,6 +27,7 @@ public class DataPoint {
 		return distance;
 	}
 	
+	
 	public static String toString(DataPoint p){
 		String x = String.valueOf(p.x_coord);
 		String y = String.valueOf(p.y_coord);
