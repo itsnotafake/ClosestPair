@@ -15,6 +15,8 @@ public class Main {
 			String s = DataPoint.toString(dp_array[i]);
 			System.out.println(s);
 		}
+		
+		dp_array = RadixSort.radixSortX(dp_array);
 	}
 	
 	public static void readFile(String s){
