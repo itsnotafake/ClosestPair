@@ -41,7 +41,7 @@ Starting with positive x coordinates:
 		
 Negative Coordinate set:
 	1: Go through list and take off negative sign
-	2: Do the same things as before, from largerst to smallest
+	2: Do the same things as before, from largest to smallest instead. (-5, -2, -10) becomes (5, 2, 10) so we want (10, 5, 2) ---> (-10, -5, -2)
 	3: Go through list and add negative sign
 	
 2: Put the two lists together.

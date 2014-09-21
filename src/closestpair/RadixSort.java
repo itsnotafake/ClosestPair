@@ -58,12 +58,19 @@ public class RadixSort {
 				negative_portion[i] = addDecimalValues(negative_portion[i], longestDecimal_negative);
 			}
 			
-			for(int i = 0; i < negative_index; i++){
+			for(int i = 0; i < negative_index; i++){//Step 2.3 of negative portion
 				int[] bucket_list = noteBucket(negative_portion, (index - (i+1)), (i+1));
 				negative_portion = rearrangeNeg(negative_portion, bucket_list, (index- (i+1)), (i+1));
 			}
 			
-			dp_arr = ArrayUtils.addAll(negative_portion, positive_portion);
+			for(int i = 0; i < negative_portion.length; i++){ //Step 3 of negative portion
+				String s = String.valueOf(negative_portion[i].x_coord);
+				s = "-" + s;
+				negative_portion[i].x_coord = Double.valueOf(s);
+				
+			}
+			
+			dp_arr = ArrayUtils.addAll(negative_portion, positive_portion); //Step 2 of Radix Sort
 			return dp_arr;
 
 		}
