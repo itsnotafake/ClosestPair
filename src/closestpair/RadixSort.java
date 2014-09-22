@@ -106,15 +106,15 @@ public class RadixSort {
 		
 		private int findIndexX(DataPoint[] dp_arr){ //returns the length of the longest value to be used as the index
 			String largest = "";
-			System.out.print("length is " + dp_arr.length);
+			System.out.println("length is " + dp_arr.length); //SOPL RIGHT HERE!!!
 			for(int i = 0; i < dp_arr.length; i++){
-				System.out.println(i);
 				String dp_arr_string = String.valueOf(dp_arr[i].x_coord);
 				if(dp_arr_string.contains(".")){
-					dp_arr_string.replace(".", "");
+					dp_arr_string = dp_arr_string.replace(".", "");
 				}
 				if(dp_arr_string.length() > largest.length()){
 					largest = dp_arr_string;
+					System.out.println(largest);
 				}
 			}
 			return largest.length();
