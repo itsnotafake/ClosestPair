@@ -8,6 +8,7 @@ public class Main {
 	
 	static int number_of_lines;
 	public static DataPoint[] dp_array;
+	static CPAlgorithm cpa = new CPAlgorithm();
 	
 	public static void main(String[] Args) throws Exception{
 		readFile(Args[0]);
@@ -16,7 +17,7 @@ public class Main {
 			System.out.println(s);
 		}
 		System.out.println();
-		
+		///////////////////////////////////////////
 		MergeSort ms = new MergeSort();
 		dp_array = ms.MergeSortGo(dp_array);
 		System.out.println();
@@ -24,6 +25,21 @@ public class Main {
 			String s = DataPoint.toString(dp_array[i]);
 			System.out.println(s);
 		}
+		System.out.println();
+		/////////////////////////////////////////////
+		MergeSortY msY = new MergeSortY();
+		DataPoint[] dp_arrayY = new DataPoint[dp_array.length];
+		for(int i = 0; i < dp_arrayY.length; i++){
+			dp_arrayY[i] = dp_array[i];
+		}
+		dp_arrayY = msY.MergeSortGo(dp_array);
+		System.out.println();
+		for(int i = 0; i < dp_array.length; i++){
+			String s = DataPoint.toString(dp_array[i]);
+			System.out.println(s);
+		}
+		////////////////////////////////////////////////
+		cpa.ClosestPair(dp_array, dp_array);
 	}
 	
 	public static void readFile(String s){

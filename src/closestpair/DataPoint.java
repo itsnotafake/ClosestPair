@@ -9,11 +9,18 @@ public class DataPoint {
 	
 	double x_coord;
 	double y_coord;
+	double distance;
 	
 	public DataPoint(double x, double y){
 		x_coord = x;
 		y_coord = y;
 		
+	}
+	
+	public DataPoint(double x, double y, double d){
+		x_coord = x;
+		y_coord = y;
+		distance = d;
 	}
 	
 	public double getX(){
@@ -24,7 +31,11 @@ public class DataPoint {
 		return y_coord;
 	}
 	
-	public static double calcDist(DataPoint p1, DataPoint p2){
+	public double getD(){
+		return distance;
+	}
+	
+	public double calcDist(DataPoint p1, DataPoint p2){
 		return Point2D.distance(p1.x_coord, p2.x_coord, p1.y_coord, p2.y_coord);
 	}
 	
