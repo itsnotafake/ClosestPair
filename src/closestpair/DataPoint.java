@@ -32,5 +32,12 @@ public class DataPoint {
 		String to_String = x + "," + y;
 		return to_String;
 	}
+	
+	public void printDataSet(DataPoint[] dp){
+		for(int i = 0; i < dp.length; i++){
+			String s = DataPoint.toString(dp[i]);
+			System.out.println(s);
+		}
+	}
 
 }
