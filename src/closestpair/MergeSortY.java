@@ -1,10 +1,10 @@
 package closestpair;
 
-public class MergeSort {
+public class MergeSortY {
 	
 	DataPoint dp = new DataPoint();
 	
-	public MergeSort(){
+	public MergeSortY(){
 	}
 	
 	public DataPoint[] MergeSortGo(DataPoint[] dp_arr){
@@ -58,7 +58,7 @@ public class MergeSort {
 				dp_arr[i] = dp_arr_left[left_holder];
 				left_holder++;
 			}
-			else if(dp_arr_left[left_holder].x_coord >= dp_arr_right[right_holder].x_coord){
+			else if(dp_arr_left[left_holder].y_coord >= dp_arr_right[right_holder].y_coord){
 				dp_arr[i] = dp_arr_left[left_holder];
 				left_holder++;
 			}
