@@ -3,6 +3,9 @@ package closestpair;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class RadixSort {
+	
+		public RadixSort(){
+		}
 
 		public DataPoint[] radixSortX(DataPoint[] dp_arr){
 			int number_positive = 0;
@@ -75,7 +78,7 @@ public class RadixSort {
 
 		}
 		
-		public int[] noteBucket(DataPoint[] dp_arr, int index, int iteration){ // returns an array that represents number of digits in each bucket ( 0 - 9 )
+		private int[] noteBucket(DataPoint[] dp_arr, int index, int iteration){ // returns an array that represents number of digits in each bucket ( 0 - 9 )
 			int[] bucket = {0,0,0,0,0,0,0,0,0,0};
 			for(int i = 0; i < dp_arr.length; i++){
 				int j = getDigit(dp_arr[i].x_coord, index, iteration);
@@ -84,7 +87,7 @@ public class RadixSort {
 			return bucket;
 		}
 		
-		public int getDigit(double x_coord, int index, int iteration){ // using index as a reference as to which digit to return, returns a specific digit in an integer
+		private int getDigit(double x_coord, int index, int iteration){ // using index as a reference as to which digit to return, returns a specific digit in an integer
 			String dp_string = String.valueOf(x_coord);
 			if(dp_string.contains(".")){
 				dp_string = dp_string.replace(".", "");
@@ -97,7 +100,7 @@ public class RadixSort {
 		}
 		
 		
-		public int findIndexX(DataPoint[] dp_arr){ //returns the length of the longest value to be used as the index
+		private int findIndexX(DataPoint[] dp_arr){ //returns the length of the longest value to be used as the index
 			String largest = "";
 			for(int i = 0; i < dp_arr.length; i++){
 				String dp_arr_string = String.valueOf(dp_arr[i].x_coord);
@@ -111,7 +114,7 @@ public class RadixSort {
 			return largest.length();
 		}
 		
-		public int findLongestDecimal(DataPoint[] dp_arr){ // will return length of longest decimal. 5 if longest is 23.00001
+		private int findLongestDecimal(DataPoint[] dp_arr){ // will return length of longest decimal. 5 if longest is 23.00001
 			double longestDecimal = 0.0;
 			for(int i = 0; i < dp_arr.length; i++){
 				String dp_arr_string = String.valueOf(dp_arr[i].x_coord);
@@ -136,7 +139,7 @@ public class RadixSort {
 			return s.length() - 1;
 		}
 		
-		public DataPoint addDecimalValues(DataPoint dp, int longestDecimal){ //adds 0s to the end of x_coord values so all values have same amount of 0s (decimal)
+		private DataPoint addDecimalValues(DataPoint dp, int longestDecimal){ //adds 0s to the end of x_coord values so all values have same amount of 0s (decimal)
 			String s = String.valueOf(dp.x_coord);
 			int dp_dec = s.lastIndexOf(".");
 			String s2 = s.substring(dp_dec);
@@ -150,7 +153,7 @@ public class RadixSort {
 			return dp;
 		}
 		
-		public DataPoint[] rearrangePos(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
+		private DataPoint[] rearrangePos(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
 			DataPoint[] zero_list = new DataPoint[bucket_list[0]];
 			DataPoint[] one_list = new DataPoint[bucket_list[1]];
 			DataPoint[] two_list = new DataPoint[bucket_list[2]];
@@ -223,7 +226,7 @@ public class RadixSort {
 		}
 		
 		
-		public DataPoint[] rearrangeNeg(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
+		private DataPoint[] rearrangeNeg(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
 			DataPoint[] zero_list = new DataPoint[bucket_list[0]];
 			DataPoint[] one_list = new DataPoint[bucket_list[1]];
 			DataPoint[] two_list = new DataPoint[bucket_list[2]];

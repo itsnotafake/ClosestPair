@@ -16,7 +16,8 @@ public class Main {
 			System.out.println(s);
 		}
 		
-		dp_array = RadixSort.radixSortX(dp_array);
+		RadixSort rs = new RadixSort();
+		dp_array = rs.radixSortX(dp_array);
 	}
 	
 	public static void readFile(String s){

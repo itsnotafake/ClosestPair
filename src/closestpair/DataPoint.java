@@ -21,10 +21,8 @@ public class DataPoint {
 		return y_coord;
 	}
 	
-	public static double calcDist(DataPoint x, DataPoint y){
-		double distance;
-		distance = Point2D.distance(x.x_coord, y.x_coord, x.y_coord, y.y_coord);
-		return distance;
+	public static double calcDist(DataPoint p1, DataPoint p2){
+		return Point2D.distance(p1.x_coord, p2.x_coord, p1.y_coord, p2.y_coord);
 	}
 	
 	
