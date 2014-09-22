@@ -18,6 +18,11 @@ public class Main {
 		
 		RadixSort rs = new RadixSort();
 		dp_array = rs.radixSortX(dp_array);
+		System.out.println();
+		for(int i = 0; i < dp_array.length; i++){
+			String s = DataPoint.toString(dp_array[i]);
+			System.out.println(s);
+		}
 	}
 	
 	public static void readFile(String s){

@@ -26,9 +26,11 @@ public class RadixSort {
 			for(int i = 0; i < dp_arr.length; i++){
 				if(dp_arr[i].x_coord > 0){
 					positive_portion[number_positive] = dp_arr[i];
+					number_positive++;
 				}
 				else{
 					negative_portion[number_negative] = dp_arr[i];
+					number_negative++;
 				}
 			} //ending here, we have completed Step 1 of RadixSort
 			
@@ -102,7 +104,9 @@ public class RadixSort {
 		
 		private int findIndexX(DataPoint[] dp_arr){ //returns the length of the longest value to be used as the index
 			String largest = "";
+			System.out.print("length is " + dp_arr.length);
 			for(int i = 0; i < dp_arr.length; i++){
+				System.out.println(i);
 				String dp_arr_string = String.valueOf(dp_arr[i].x_coord);
 				if(dp_arr_string.contains(".")){
 					dp_arr_string.replace(".", "");
