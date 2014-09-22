@@ -39,6 +39,7 @@ public class Main {
 				DataPoint new_dp = new DataPoint(x,y);
 				dp_array[i] = new_dp;
 				i++;
+				newFile.nextLine();
 			}
 			newFile.close();
 		}

@@ -90,13 +90,13 @@ public class RadixSort {
 			int[] bucket = {0,0,0,0,0,0,0,0,0,0};
 			for(int i = 0; i < dp_arr.length; i++){
 				int j = getDigit(dp_arr[i].x_coord, index, longestDecimal, longestLength);
+				System.out.println("Digit is: " + j);
 				bucket[j] = bucket[j] + 1;	
 			}
 			return bucket;
 		}
 		
 		private int getDigit(double x_coord, int index, int longestDecimal, int longestLength){ // using index as a reference as to which digit to return, returns a specific digit in an integer
-			int digit = 0; 
 			String s = String.valueOf(x_coord);
 			int decimal_marker = s.indexOf(".");
 			String s_after_decimal_and_with_decimal = s.substring(decimal_marker);
@@ -104,14 +104,14 @@ public class RadixSort {
 			
 			if(index >= (longestLength - longestDecimal)){
 				if(index - current_decimal_length > 0){
-					digit = 0;
+					return 0;
 				}
 			}
-			else{
-				s = s.replace(".", "");
-				digit = s.indexOf(index+1);
-			}
-			return digit;
+			s = s.replace(".", "");
+			char c = s.charAt(index);
+			String s2 = String.valueOf(c);
+			double digit = Double.valueOf(s2);
+			return (int) digit;
 		}
 		
 		
@@ -236,7 +236,7 @@ public class RadixSort {
 					nine_marker++;
 				}
 			}
-			dp_arr = (DataPoint[]) ArrayUtils.addAll(zero_list, one_list, two_list, three_list, four_list, 
+			dp_arr = addArrays(zero_list, one_list, two_list, three_list, four_list, 
 					five_list, six_list, seven_list, eight_list, nine_list);
 			return dp_arr;
 			
@@ -309,10 +309,27 @@ public class RadixSort {
 					nine_marker++;
 				}
 			}
-			dp_arr = (DataPoint[]) ArrayUtils.addAll(nine_list, eight_list, seven_list, six_list, five_list, four_list, three_list,
+			dp_arr = addArrays(nine_list, eight_list, seven_list, six_list, five_list, four_list, three_list,
 					two_list, one_list, zero_list);
 			return dp_arr;
 			
+		}
+		
+		private DataPoint[] addArrays(DataPoint[] dp_a, DataPoint[] dp_b, DataPoint[] dp_c, DataPoint[] dp_d, DataPoint[] dp_e, DataPoint[] dp_f, DataPoint[] dp_g, DataPoint[] dp_h, 
+				DataPoint[] dp_i, DataPoint[] dp_j){
+			DataPoint[] a_b = (DataPoint[]) ArrayUtils.addAll(dp_a, dp_b);
+			DataPoint[] c_d = (DataPoint[]) ArrayUtils.addAll(dp_c, dp_d);
+			DataPoint[] e_f = (DataPoint[]) ArrayUtils.addAll(dp_e, dp_f);
+			DataPoint[] g_h = (DataPoint[]) ArrayUtils.addAll(dp_g, dp_h);
+			DataPoint[] i_j = (DataPoint[]) ArrayUtils.addAll(dp_i, dp_j);
+			
+			DataPoint[] a_b_c_d = (DataPoint[]) ArrayUtils.addAll(a_b, c_d);
+			DataPoint[] e_f_g_h = (DataPoint[]) ArrayUtils.addAll(e_f, g_h);
+			
+			DataPoint[] a_b_c_d_e_f_g_h = (DataPoint[]) ArrayUtils.addAll(a_b_c_d, e_f_g_h);
+			
+			DataPoint[] a_b_c_d_e_f_g_h_i_j = (DataPoint[]) ArrayUtils.addAll(a_b_c_d_e_f_g_h, i_j);
+			return a_b_c_d_e_f_g_h_i_j;
 		}
 		
 		
