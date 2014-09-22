@@ -4,8 +4,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class RadixSort {
 	
-		DataPoint data_point = new DataPoint();
-	
 		public RadixSort(){
 		}
 
@@ -36,17 +34,22 @@ public class RadixSort {
 				}
 			} //ending here, we have completed Step 1 of RadixSort
 			DataPoint.printDataSet(positive_portion);
+			System.out.println();
 			DataPoint.printDataSet(negative_portion);
+			System.out.println();
 			
 			
 			
 			int index = findIndexX(positive_portion); //Step 1 of positive portion
+			System.out.println("Index/longest length is: " + index);
 			
 			int longestDecimal = findLongestDecimal(positive_portion); //Step 2 of positive portion
 			System.out.println("Longest Decimal is: " + longestDecimal);
 			for(int i = 0; i < positive_portion.length; i++){
 				positive_portion[i] = addDecimalValues(positive_portion[i], longestDecimal);
 			}
+			DataPoint.printDataSet(positive_portion);
+			System.out.println();
 			
 			for(int i = 0; i < index; i++){//Step 3 of positive portion
 				int[] bucket_list = noteBucket(positive_portion, (index - (i+1)), (i+1));
