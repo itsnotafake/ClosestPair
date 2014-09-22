@@ -4,6 +4,8 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class RadixSort {
 	
+		DataPoint data_point = new DataPoint();
+	
 		public RadixSort(){
 		}
 
@@ -32,6 +34,8 @@ public class RadixSort {
 					negative_portion[number_negative] = dp_arr[i];
 					number_negative++;
 				}
+			//data_point.printDataSet(positive_portion);
+			//data_point.printDataSet(negative_portion);
 			} //ending here, we have completed Step 1 of RadixSort
 			
 			
@@ -75,9 +79,7 @@ public class RadixSort {
 				
 			}
 			
-			dp_arr = ArrayUtils.addAll(negative_portion, positive_portion); //Step 2 of Radix Sort
-			return dp_arr;
-
+			return ArrayUtils.addAll(negative_portion, positive_portion); //Step 2 of Radix Sort
 		}
 		
 		private int[] noteBucket(DataPoint[] dp_arr, int index, int iteration){ // returns an array that represents number of digits in each bucket ( 0 - 9 )

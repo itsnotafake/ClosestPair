@@ -15,6 +15,7 @@ public class Main {
 			String s = DataPoint.toString(dp_array[i]);
 			System.out.println(s);
 		}
+		System.out.println();
 		
 		RadixSort rs = new RadixSort();
 		dp_array = rs.radixSortX(dp_array);

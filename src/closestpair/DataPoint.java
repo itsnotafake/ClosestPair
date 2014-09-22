@@ -4,6 +4,9 @@ import java.awt.geom.Point2D;
 
 public class DataPoint {
 	
+	public DataPoint(){
+	}
+	
 	double x_coord;
 	double y_coord;
 	
