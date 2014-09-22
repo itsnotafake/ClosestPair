@@ -46,7 +46,7 @@ public class RadixSort {
 			int longestDecimal = findLongestDecimal(positive_portion); //Step 2 of positive portion
 			System.out.println("Longest Decimal is: " + longestDecimal);
 			for(int i = 0; i < positive_portion.length; i++){
-				positive_portion[i] = addDecimalValues(positive_portion[i], longestDecimal);
+				addDecimalValues(positive_portion[i], longestDecimal);
 			}
 			DataPoint.printDataSet(positive_portion);
 			System.out.println();
@@ -68,7 +68,7 @@ public class RadixSort {
 			
 			int longestDecimal_negative = findLongestDecimal(negative_portion); //Step 2.2 negative portion
 			for(int i = 0; i < negative_portion.length; i++){
-				negative_portion[i] = addDecimalValues(negative_portion[i], longestDecimal_negative);
+				addDecimalValues(negative_portion[i], longestDecimal_negative);
 			}
 			
 			for(int i = 0; i < negative_index; i++){//Step 2.3 of negative portion
@@ -150,7 +150,7 @@ public class RadixSort {
 			return s.length() - 1;
 		}
 		
-		private DataPoint addDecimalValues(DataPoint dp, int longestDecimal){ //adds 0s to the end of x_coord values so all values have same amount of 0s (decimal)
+		private void addDecimalValues(DataPoint dp, int longestDecimal){ //adds 0s to the end of x_coord values so all values have same amount of 0s (decimal)
 			String s = String.valueOf(dp.x_coord);
 			int dp_dec = s.lastIndexOf(".");
 			String s2 = s.substring(dp_dec);
@@ -161,7 +161,6 @@ public class RadixSort {
 			}
 			double new_x_coord = Double.valueOf(s);
 			dp.x_coord = new_x_coord;
-			return dp;
 		}
 		
 		private DataPoint[] rearrangePos(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
