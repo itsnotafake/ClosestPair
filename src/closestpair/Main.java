@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
 	
 	static int number_of_lines;
-	static DataPoint[] dp_array;
+	public static DataPoint[] dp_array;
 	
 	public static void main(String[] Args) throws Exception{
 		readFile(Args[0]);
