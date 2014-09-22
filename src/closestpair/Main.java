@@ -17,8 +17,8 @@ public class Main {
 		}
 		System.out.println();
 		
-		RadixSort rs = new RadixSort();
-		dp_array = rs.radixSortX(dp_array);
+		MergeSort ms = new MergeSort();
+		dp_array = ms.MergeSortGo(dp_array);
 		System.out.println();
 		for(int i = 0; i < dp_array.length; i++){
 			String s = DataPoint.toString(dp_array[i]);
