@@ -40,20 +40,20 @@ public class RadixSort {
 			
 			
 			
-			int index = findIndexX(positive_portion); //Step 1 of positive portion
-			System.out.println("Index/longest length is: " + index);
+			int longestLength = findLongestLength(positive_portion); //Step 1 of positive portion
+			System.out.println("Index/longest length is: " + longestLength);
 			
 			int longestDecimal = findLongestDecimal(positive_portion); //Step 2 of positive portion
 			System.out.println("Longest Decimal is: " + longestDecimal);
-			for(int i = 0; i < positive_portion.length; i++){
+			/*for(int i = 0; i < positive_portion.length; i++){
 				addDecimalValues(positive_portion[i], longestDecimal);
 			}
 			DataPoint.printDataSet(positive_portion);
-			System.out.println();
+			System.out.println();*/
 			
-			for(int i = 0; i < index; i++){//Step 3 of positive portion
-				int[] bucket_list = noteBucket(positive_portion, (index - (i+1)), (i+1));
-				positive_portion = rearrangePos(positive_portion, bucket_list, (index - (i+1)), (i+1)); //rearrange completes Step 4 and 5 of positive portion
+			for(int i = (longestLength-1); i >= 0; i--){//Step 3 of positive portion
+				int[] bucket_list = noteBucket(positive_portion, i, longestDecimal, longestLength); //HERE!!!!
+				positive_portion = rearrangePos(positive_portion, bucket_list, i, longestDecimal, longestLength); //rearrange completes Step 4 and 5 of positive portion
 			}
 			
 			//Here begins the negative portion section
@@ -64,16 +64,16 @@ public class RadixSort {
 				negative_portion[i].x_coord = Double.valueOf(s);
 			}
 			
-			int negative_index = findIndexX(negative_portion); //Step 2.1 negative portion
+			int negative_longestLength = findLongestLength(negative_portion); //Step 2.1 negative portion
 			
 			int longestDecimal_negative = findLongestDecimal(negative_portion); //Step 2.2 negative portion
 			for(int i = 0; i < negative_portion.length; i++){
 				addDecimalValues(negative_portion[i], longestDecimal_negative);
 			}
 			
-			for(int i = 0; i < negative_index; i++){//Step 2.3 of negative portion
-				int[] bucket_list = noteBucket(negative_portion, (index - (i+1)), (i+1));
-				negative_portion = rearrangeNeg(negative_portion, bucket_list, (index- (i+1)), (i+1));
+			for(int i = (negative_longestLength - 1); i >= 0; i--){//Step 2.3 of negative portion
+				int[] bucket_list = noteBucket(negative_portion, i, longestDecimal_negative, negative_longestLength);
+				negative_portion = rearrangeNeg(negative_portion, bucket_list, i, longestDecimal_negative, negative_longestLength);
 			}
 			
 			for(int i = 0; i < negative_portion.length; i++){ //Step 3 of negative portion
@@ -86,43 +86,50 @@ public class RadixSort {
 			return ArrayUtils.addAll(negative_portion, positive_portion); //Step 2 of Radix Sort
 		}
 		
-		private int[] noteBucket(DataPoint[] dp_arr, int index, int iteration){ // returns an array that represents number of digits in each bucket ( 0 - 9 )
+		private int[] noteBucket(DataPoint[] dp_arr, int index, int longestDecimal, int longestLength){ // returns an array that represents number of digits in each bucket ( 0 - 9 )
 			int[] bucket = {0,0,0,0,0,0,0,0,0,0};
 			for(int i = 0; i < dp_arr.length; i++){
-				int j = getDigit(dp_arr[i].x_coord, index, iteration);
+				int j = getDigit(dp_arr[i].x_coord, index, longestDecimal, longestLength);
 				bucket[j] = bucket[j] + 1;	
 			}
 			return bucket;
 		}
 		
-		private int getDigit(double x_coord, int index, int iteration){ // using index as a reference as to which digit to return, returns a specific digit in an integer
-			String dp_string = String.valueOf(x_coord);
-			if(dp_string.contains(".")){
-				dp_string = dp_string.replace(".", "");
+		private int getDigit(double x_coord, int index, int longestDecimal, int longestLength){ // using index as a reference as to which digit to return, returns a specific digit in an integer
+			int digit = 0; 
+			String s = String.valueOf(x_coord);
+			int decimal_marker = s.indexOf(".");
+			String s_after_decimal_and_with_decimal = s.substring(decimal_marker);
+			int current_decimal_length = s_after_decimal_and_with_decimal.length() - 1;
+			
+			if(index >= (longestLength - longestDecimal)){
+				if(index - current_decimal_length > 0){
+					digit = 0;
+				}
 			}
-			char[] dp_char_array = dp_string.toCharArray();
-			if(dp_char_array.length < iteration){
-				return 0;
+			else{
+				s = s.replace(".", "");
+				digit = s.indexOf(index+1);
 			}
-			return (int)dp_char_array[index];
+			return digit;
 		}
 		
 		
-		private int findIndexX(DataPoint[] dp_arr){ //returns the length of the longest value to be used as the index
-			String largest = "";
+		private int findLongestLength(DataPoint[] dp_arr){ //returns the length of the longest value to be used as the index
+			String longest = "";
 			System.out.println("length is " + dp_arr.length); //SOPL RIGHT HERE!!!
 			for(int i = 0; i < dp_arr.length; i++){
 				String dp_arr_string = String.valueOf(dp_arr[i].x_coord);
 				if(dp_arr_string.contains(".")){
 					dp_arr_string = dp_arr_string.replace(".", "");
 				}
-				if(dp_arr_string.length() > largest.length()){
-					largest = dp_arr_string;
-					System.out.println(largest); //SOPL HERE!!!
+				if(dp_arr_string.length() > longest.length()){
+					longest = dp_arr_string;
+					System.out.println(longest); //SOPL HERE!!!
 				}
 			}
-			System.out.println("longest length is: " + largest.length()); //SOPL HERE !!!!
-			return largest.length();
+			System.out.println("longest length is: " + longest.length()); //SOPL HERE !!!!
+			return longest.length();
 		}
 		
 		private int findLongestDecimal(DataPoint[] dp_arr){ // will return length of longest decimal. 5 if longest is 23.00001
@@ -156,14 +163,14 @@ public class RadixSort {
 			String s2 = s.substring(dp_dec);
 			int s2_length = s2.length() - 1;
 			while((longestDecimal - s2_length) > 0){
-				s.concat("0");
+				s = s.concat("0");
 				s2_length++;
 			}
 			double new_x_coord = Double.valueOf(s);
 			dp.x_coord = new_x_coord;
 		}
 		
-		private DataPoint[] rearrangePos(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
+		private DataPoint[] rearrangePos(DataPoint[] dp_arr, int[] bucket_list, int index, int longestDecimal, int LongestLength){
 			DataPoint[] zero_list = new DataPoint[bucket_list[0]];
 			DataPoint[] one_list = new DataPoint[bucket_list[1]];
 			DataPoint[] two_list = new DataPoint[bucket_list[2]];
@@ -187,7 +194,7 @@ public class RadixSort {
 			int nine_marker = 0;
 			
 			for(int i = 0; i < dp_arr.length; i++){
-				int digit = getDigit(dp_arr[i].x_coord, index, iteration);
+				int digit = getDigit(dp_arr[i].x_coord, index, longestDecimal, LongestLength);
 				if(digit == 0){
 					zero_list[zero_marker] = dp_arr[i];
 					zero_marker++;
@@ -236,7 +243,7 @@ public class RadixSort {
 		}
 		
 		
-		private DataPoint[] rearrangeNeg(DataPoint[] dp_arr, int[] bucket_list, int index, int iteration){
+		private DataPoint[] rearrangeNeg(DataPoint[] dp_arr, int[] bucket_list, int index, int longestDecimal, int longestLength){
 			DataPoint[] zero_list = new DataPoint[bucket_list[0]];
 			DataPoint[] one_list = new DataPoint[bucket_list[1]];
 			DataPoint[] two_list = new DataPoint[bucket_list[2]];
@@ -260,7 +267,7 @@ public class RadixSort {
 			int nine_marker = 0;
 			
 			for(int i = 0; i < dp_arr.length; i++){
-				int digit = getDigit(dp_arr[i].x_coord, index, iteration);
+				int digit = getDigit(dp_arr[i].x_coord, index, longestDecimal, longestLength);
 				if(digit == 0){
 					zero_list[zero_marker] = dp_arr[i];
 					zero_marker++;
