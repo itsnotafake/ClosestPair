@@ -36,7 +36,7 @@ public class DataPoint {
 		return to_String;
 	}
 	
-	public void printDataSet(DataPoint[] dp){
+	public static void printDataSet(DataPoint[] dp){
 		for(int i = 0; i < dp.length; i++){
 			String s = DataPoint.toString(dp[i]);
 			System.out.println(s);

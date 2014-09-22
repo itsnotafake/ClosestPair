@@ -34,15 +34,16 @@ public class RadixSort {
 					negative_portion[number_negative] = dp_arr[i];
 					number_negative++;
 				}
-			//data_point.printDataSet(positive_portion);
-			//data_point.printDataSet(negative_portion);
 			} //ending here, we have completed Step 1 of RadixSort
+			DataPoint.printDataSet(positive_portion);
+			DataPoint.printDataSet(negative_portion);
 			
 			
 			
 			int index = findIndexX(positive_portion); //Step 1 of positive portion
 			
 			int longestDecimal = findLongestDecimal(positive_portion); //Step 2 of positive portion
+			System.out.println("Longest Decimal is: " + longestDecimal);
 			for(int i = 0; i < positive_portion.length; i++){
 				positive_portion[i] = addDecimalValues(positive_portion[i], longestDecimal);
 			}
@@ -114,9 +115,10 @@ public class RadixSort {
 				}
 				if(dp_arr_string.length() > largest.length()){
 					largest = dp_arr_string;
-					System.out.println(largest);
+					System.out.println(largest); //SOPL HERE!!!
 				}
 			}
+			System.out.println("longest length is: " + largest.length()); //SOPL HERE !!!!
 			return largest.length();
 		}
 		
